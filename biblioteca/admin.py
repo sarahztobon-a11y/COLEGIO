@@ -1,5 +1,5 @@
 from django.contrib import admin
-from app_biblioteca.models import Autor, Libro
+from biblioteca.models import Autor, Libro
 
 @admin.register(Autor)
 class AutorAdmin(admin.ModelAdmin):
@@ -10,4 +10,4 @@ class AutorAdmin(admin.ModelAdmin):
 class LibroAdmin(admin.ModelAdmin):
     list_display = ('titulo', 'autor', 'precio', 'disponible')
     list_filter = ('disponible', 'autor')
-    search_fields = ('titulo',)
+    search_fields = ('titulo',)  

@@ -1,8 +1,10 @@
 from django.http import HttpResponse
-from .models import Libro 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework import viewsets  
 
+from .models import Libro, Autor  
+from .serializers import AutorSerializer, LibroSerializer
 
 def resumen(request):
     total = Libro.objects.count()
@@ -22,3 +24,11 @@ def listado_libros(request):
         for libro in libros
     ]
     return Response(datos)
+
+class AutorViewSet(viewsets.ModelViewSet):
+    queryset = Autor.objects.all()
+    serializer_class = AutorSerializer
+
+class LibroViewSet(viewsets.ModelViewSet):
+    queryset = Libro.objects.all().order_by('titulo')
+    serializer_class = LibroSerializer
